@@ -11,9 +11,14 @@ class Cartitem extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cart_id',
+        'user_id',
         'product_id',
         'quantity',
-        'price',
     ];
+
+
+    protected static function newFactory()
+    {
+        return \Modules\Payment\Database\Factories\CartitemFactory::new();
+    }
 }

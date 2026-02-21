@@ -6,6 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Modules\Order\Models\Order;
 use Modules\Order\Models\OrderLine;
+use Modules\Payment\Models\Cartitem;
 
 class PaymentTest extends TestCase
 {
@@ -14,6 +15,7 @@ class PaymentTest extends TestCase
     /** @test */
    public function test_it_works()
     {
-        $this->assertTrue(true);
+        $cart = Cartitem::factory()->create();
+        $this->assertInstanceOf(Cartitem::class, $cart);
     }
 }
