@@ -11,8 +11,12 @@ class OrderLine extends Model
     use HasFactory;
     protected $fillable = [
         'order_id',
-        'product_id',
         'quantity',
         'price',
     ];
+
+    protected static function newFactory()
+    {
+        return \Modules\Order\Database\Factories\OrderLineFactory::new();
+    }
 }

@@ -15,4 +15,9 @@ class Order extends Model
         'total_price',
         'status'
     ];
+
+    protected static function newFactory()
+    {
+        return \Modules\Order\Database\Factories\OrderFactory::new();
+    }
 }

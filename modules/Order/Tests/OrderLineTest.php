@@ -4,7 +4,6 @@ namespace Modules\Order\Tests;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Modules\Order\Models\Order;
 use Modules\Order\Models\OrderLine;
 
 class OrderLineTest extends TestCase
@@ -14,6 +13,7 @@ class OrderLineTest extends TestCase
     /** @test */
    public function test_it_works()
     {
-        $this->assertTrue(true);
+        $orderLine = OrderLine::factory()->create();
+        dd($orderLine);
     }
 }
