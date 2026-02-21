@@ -9,6 +9,7 @@ use Modules\Product\Models\Product;
 
 class CartitemFactory extends Factory 
 {
+    /** @noinspection PhpFullyQualifiedNameUsageInspection */
     protected $model = \Modules\Payment\Models\Cartitem::class;
 
     public function definition()

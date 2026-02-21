@@ -4,7 +4,7 @@ namespace Modules\Shipment\Tests;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-
+use Modules\Shipment\Models\Shipment;
 
 class ShipmentTest extends TestCase
 {
@@ -13,6 +13,8 @@ class ShipmentTest extends TestCase
     /** @test */
    public function test_it_works()
     {
-        $this->assertTrue(true);
-    }
+        $shipment = Shipment::factory()->create();
+        
+        $this->assertDatabaseHas($shipment);
+        }
 }

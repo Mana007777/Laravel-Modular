@@ -12,8 +12,16 @@ class Shipment extends Model
 
     protected $fillable = [
         'order_id',
-        'tracking_number',
-        'carrier',
+        'address',
+        'phone',
+        'city',
         'status',
+        'shipped_at',
+        'delivered_at',
     ];
+
+    protected static function newFactory()
+    {
+        return \Modules\Shipment\Database\Factories\ShipmentFactory::new();
+    }
 }
