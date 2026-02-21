@@ -17,7 +17,7 @@ class OrderFactory extends Factory
     {
         return [
             "user_id"=> User::factory(),
-            'total_price' => 1,
+            'total' => 1,
             'status' => 'pending',
         ];
        

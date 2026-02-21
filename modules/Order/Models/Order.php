@@ -12,10 +12,14 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'total_price',
+        'total',
         'status'
     ];
 
+    public function lines()
+    {
+        return $this->hasMany(OrderLine::class);
+    }
     protected static function newFactory()
     {
         return \Modules\Order\Database\Factories\OrderFactory::new();
