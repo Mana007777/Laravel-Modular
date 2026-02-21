@@ -20,6 +20,7 @@ class OrderFactory extends Factory
             'total_price' => 1,
             'status' => 'pending',
         ];
+       
     }
 
 }
