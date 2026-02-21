@@ -14,6 +14,7 @@ class ProductTest extends TestCase
     /** @test */
    public function test_it_works()
     {
-        $this->assertTrue(true);
+        $product = \Modules\Product\Models\Product::factory()->create();
+        $this->assertInstanceOf(\Modules\Product\Models\Product::class, $product);
     }
 }

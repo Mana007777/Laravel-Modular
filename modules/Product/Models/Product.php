@@ -17,4 +17,9 @@ class Product extends Model
         'stock',
         'image',
     ];
+
+    protected static function newFactory()
+    {
+        return \Modules\Product\Database\Factories\ProductFactory::new();
+    }
 }

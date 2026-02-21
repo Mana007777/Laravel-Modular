@@ -14,6 +14,7 @@ class OrderLineTest extends TestCase
    public function test_it_works()
     {
         $orderLine = OrderLine::factory()->create();
-        dd($orderLine);
+        // dump($orderLine);
+        $this->assertInstanceOf(OrderLine::class, $orderLine);
     }
 }

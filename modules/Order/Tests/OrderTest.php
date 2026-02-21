@@ -18,7 +18,7 @@ class OrderTest extends TestCase
         $order = Order::factory()->create([
             'user_id' => $user->id
         ]);
-        // $this->assertInstanceOf(Order::class, $order);
-        // dd($order);
+        $this->assertInstanceOf(Order::class, $order);
+        // dump($order);
     }
 }
