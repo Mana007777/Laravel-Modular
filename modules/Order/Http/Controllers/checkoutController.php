@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Modules\Order\Http\Requests\CheckoutRequest;
 use Modules\Product\Models\Product;
 use Modules\Order\Models\Order;
-use Modules\Order\Models\OrderLine;
 use Modules\Payment\PayBuddy;
 use Illuminate\Support\Facades\DB;
 
@@ -14,32 +13,33 @@ class CheckoutController extends Controller
 {
     public function __invoke(CheckoutRequest $request)
     {
-        return DB::transaction(function () use ($request) {
+        $dto = $request->toDTO();
+
+        return DB::transaction(function () use ($dto) {
 
             $total = 0;
             $lines = [];
 
-            foreach ($request->products as $item) {
+            foreach ($dto->products as $item) {
 
-                $product = Product::lockForUpdate()->findOrFail($item['product_id']);
+                $product = Product::lockForUpdate()->findOrFail($item->product_id);
 
-                if ($product->stock < $item['quantity']) {
+                if ($product->stock < $item->quantity) {
                     abort(422, 'Insufficient stock');
                 }
 
-                $product->decrement('stock', $item['quantity']);
+                $product->decrement('stock', $item->quantity);
 
-                $lineTotal = $product->price * $item['quantity'];
+                $lineTotal = $product->price * $item->quantity;
                 $total += $lineTotal;
 
                 $lines[] = [
                     'product_id' => $product->id,
-                    'quantity' => $item['quantity'],
-                    'price' => $product->price,
+                    'quantity'   => $item->quantity,
+                    'price'      => $product->price,
                 ];
             }
 
-            // simulate payment
             $payment = PayBuddy::make()->charge(
                 'tok_test_123456789012345',
                 (int) round($total * 100),
@@ -47,7 +47,7 @@ class CheckoutController extends Controller
             );
 
             $order = Order::create([
-                'user_id' => auth()->id(),
+                'user_id' => $dto->user_id,
                 'total' => $total,
                 'payment_id' => $payment['id'],
             ]);
